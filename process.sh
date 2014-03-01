@@ -15,11 +15,11 @@ for project in `ls project-*`; do
 	title=$(grep \<h1 $project|cut -d\> -f2|cut -d \< -f1|sed 's/\"//g');
 	
 	# * description
-	description=$(grep \<h1 $project -A20|grep "<div" -B20|grep -v \<h1|grep -v \<div|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g');
+	description=$(grep \<h1 $project -A30|grep "<div" -B30|grep -v \<h1|grep -v \<div|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g');
 	# TODO: html2txt description
 
 	# * each of the "Project ID card" fields
-	idcard=$(grep "Project ID card" $project -A20|grep -v "Project ID card"|grep class=\"rightlabel -B20|grep -v \<div|grep -v \<\/div|grep -v ul\>|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g');
+	idcard=$(grep "Project ID card" $project -A30|grep -v "Project ID card"|grep class=\"rightlabel -B30|grep -v \<div|grep -v \<\/div|grep -v ul\>|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g');
 	# TODO: parse idcard
 	
 	# * Participating partners table
