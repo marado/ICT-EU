@@ -1,21 +1,8 @@
 #!/bin/bash
 
-# 01 -- fetch list
-rm -rf tmp ;
-mkdir tmp ;
-cd tmp ;
-echo "Fetching projects list";
-wget "http://ec.europa.eu/information_society/apps/projects/index.cfm?menu=secondary" -O list.html -o /dev/null ;
+## This fetches and then processes.
+##
+## The fetcher and processor are different scripts, so you can easilly
+## reprocess what you've already fetched.
 
-# 02 -- fetch projects
-for purl in `grep factsheet\/index list.html |cut -d\" -f2`; do 
-	pname=$(echo $purl|cut -d= -f2);
-	echo "Fetching project: $pname";
-	wget "http://ec.europa.eu/information_society/apps/projects/$purl" -O project-$pname -o /dev/null ;
-done
-
-# 03 -- for each project, grab info and process it
-# TODO
-
-# 04 -- generate final CSV
-# TODO
+./fetch.sh && ./process.sh
