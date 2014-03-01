@@ -15,7 +15,7 @@ for project in `ls project-*`; do
 	title=$(grep \<h1 $project|cut -d\> -f2|cut -d \< -f1|sed 's/\"//g');
 	
 	# * description
-	description=$(grep \<h1 $project -A30|grep "<div" -B30|grep -v \<h1|grep -v \<div|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g');
+	description=$(grep \<h1 $project -A60|grep "<div" -B60|grep -v \<h1|grep -v \<div|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g');
 	# TODO: html2txt description
 
 	# * each of the "Project ID card" fields
@@ -23,7 +23,7 @@ for project in `ls project-*`; do
 	# TODO: parse idcard
 	
 	# * Participating partners table
-	partners=$(grep partTable $project -A100|grep \<\/table -B100|grep -v \<table|grep -v \<\/table|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g');
+	partners=$(grep partTable $project -A600|grep \<\/table -B600|grep -v \<table|grep -v \<\/table|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g');
 	# TODO: parse partners
 
 	# 04 -- generate final CSV
@@ -33,3 +33,5 @@ for project in `ls project-*`; do
 done
 
 echo "CSV generated: see final.csv";
+echo -n "Number of projects with empty fields: "; grep \"\" ../final.csv |wc -l;
+
