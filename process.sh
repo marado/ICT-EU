@@ -20,7 +20,7 @@ for project in `ls project-*`; do
 	# TODO: html2txt description
 
 	# * each of the "Project ID card" fields
-	rawidcard=$(grep "Project ID card" $project -A30|grep -v "Project ID card"|grep class=\"rightlabel -B30|grep -v \<div|grep -v \<\/div|grep -v ul\>|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g'|sed 's///g'|sed 's/&#8364;/€/g');
+	rawidcard=$(grep "Project ID card" $project -A30|grep -v "Project ID card"|grep class=\"rightlabel -B30|grep -v \<div|grep -v \<\/div|grep -v ul\>|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g'|sed 's///g'|sed 's/&#8364;/Euro /g');
 	# parse idcard
 	idcard=$(for i in `echo $rawidcard`; do echo -n "$i "; done|sed 's/<\/li>/\r\n/g');
 	funded=$(echo "$idcard"|grep "Funded under"|cut -d: -f2-|cut -d\> -f2-|cut -d\< -f1);
