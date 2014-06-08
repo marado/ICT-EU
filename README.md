@@ -5,6 +5,6 @@ For each of the projects listed on this webpage, fetch:
 * title
 * description
 * each of the "Project ID card" fields
-* Participating partners table
+* Participating partners (number of partners and number of partner countries)
 
 Show results somehow in a CSV

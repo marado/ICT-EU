@@ -3,7 +3,7 @@
 cd tmp ;
 
 rm -f ../final.csv ;
-echo "\"Reference ID\";\"Title\";\"Description\";\"Funded Under\";\"Area\";\"Cost\";\"Contribution\";\"Reference\";\"Execution\";\"Project Status\";\"Contract Type\";\"Partners\"" > ../final.csv ;
+echo "\"Reference ID\";\"Title\";\"Description\";\"Funded Under\";\"Area\";\"Cost\";\"Contribution\";\"Reference\";\"Execution\";\"Project Status\";\"Contract Type\";\"Number of Partners\";\"Number of partner countries\"" > ../final.csv ;
 
 # 03 -- for each project, grab info and process it
 for project in `ls project-*`; do 
@@ -32,11 +32,12 @@ for project in `ls project-*`; do
 	
 	# * Participating partners table
 	partners=$(grep partTable $project -A600|grep \<\/table -B600|grep -v \<table|grep -v \<\/table|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g'|sed 's///g');
-	# TODO: parse partners
+	numpartners=$(echo `echo $partners |sed 's/<tr>/\n/g'|grep -v ^$|wc -l`"-1"|bc);
+        partnercountries=$(echo $partners|sed 's/<tr>/\n/g'|grep -v ^$|grep -v "scope=col"|cut -d\> -f4|sort -u|wc -l);
 
 	# 04 -- generate final CSV
 	echo ": Generating CSV entry for $project";
-	echo "\"$project\";\"$title\";\"$description\";\"$funded\";\"$area\";\"$cost\";\"$contribution\";\"$reference\";\"$execution\";\"$pstatus\";\"$ctype\";\"$partners\"" >> ../final.csv ;
+	echo "\"$project\";\"$title\";\"$description\";\"$funded\";\"$area\";\"$cost\";\"$contribution\";\"$reference\";\"$execution\";\"$pstatus\";\"$ctype\";\"$numpartners\";\"$partnercountries\"" >> ../final.csv ;
 
 done
 
