@@ -3,7 +3,6 @@
 cd tmp ;
 
 rm -f ../final.csv ;
-# echo "\"Reference ID\";\"Title\";\"Description\";\"ID Card\";\"Partners\"" > ../final.csv ;
 echo "\"Reference ID\";\"Title\";\"Description\";\"Funded Under\";\"Area\";\"Cost\";\"Contribution\";\"Reference\";\"Execution\";\"Project Status\";\"Contract Type\";\"Partners\"" > ../final.csv ;
 
 # 03 -- for each project, grab info and process it
@@ -16,8 +15,7 @@ for project in `ls project-*`; do
 	title=$(grep \<h1 $project|cut -d\> -f2|cut -d \< -f1|sed 's/\"//g'|sed 's///g');
 	
 	# * description
-	description=$(grep \<h1 $project -A60|grep "<div" -B60|grep -v \<h1|grep -v \<div|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g'|sed 's///g');
-	# TODO: html2txt description
+	description=$(grep \<h1 $project -A60|grep "<div" -B60|grep -v \<h1|grep -v \<div|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g'|sed 's///g'|html2text|sed ':a;N;$!ba;s/\n/ /g');
 
 	# * each of the "Project ID card" fields
 	rawidcard=$(grep "Project ID card" $project -A30|grep -v "Project ID card"|grep class=\"rightlabel -B30|grep -v \<div|grep -v \<\/div|grep -v ul\>|sed ':a;N;$!ba;s/\n/ /g'|sed 's/\"//g'|sed 's///g'|sed 's/&#8364;/Euro /g');
@@ -38,7 +36,6 @@ for project in `ls project-*`; do
 
 	# 04 -- generate final CSV
 	echo ": Generating CSV entry for $project";
-	# echo "\"$project\";\"$title\";\"$description\";\"$idcard\";\"$partners\"" >> ../final.csv ;
 	echo "\"$project\";\"$title\";\"$description\";\"$funded\";\"$area\";\"$cost\";\"$contribution\";\"$reference\";\"$execution\";\"$pstatus\";\"$ctype\";\"$partners\"" >> ../final.csv ;
 
 done
