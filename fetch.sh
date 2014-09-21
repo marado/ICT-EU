@@ -9,9 +9,9 @@ wget "http://ec.europa.eu/information_society/apps/projects/index.cfm?menu=secon
 
 # 02 -- fetch projects
 for purl in `grep factsheet\/index list.html |cut -d\" -f2`; do 
-	pname=$(echo $purl|cut -d= -f2);
+	pname=$(echo "$purl"|cut -d= -f2);
 	echo "Fetching project: $pname";
-	wget "http://ec.europa.eu/information_society/apps/projects/$purl" -O project-$pname -o /dev/null ;
+	wget "http://ec.europa.eu/information_society/apps/projects/$purl" -O "project-$pname" -o /dev/null ;
 done
 
 
