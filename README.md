@@ -29,3 +29,7 @@ The following steps assume you have a clone of this repository on your system.
 2. Go to the directory where this repository is;
 3. Type ‘sh ICT-EU.sh’;
 4. A new CSV file called final.csv was created in the directory.
+
+### Known issues
+
+While this script is meant to work on both GNU/Linux and Mac OS systems, it seems that the output is malformed in Mac OS X.
