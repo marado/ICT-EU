@@ -1,6 +1,8 @@
 ## ICT-EU 
 ### What is it?
-ICT-EU is a shell script written by Marcos Marado to, using EU’s website as a data source, generate a CSV file with information about all Information Society EU Programmes. 
+ICT-EU is a shell script written by Marcos Marado to, using EU’s website as a
+data source, generate a CSV file with information about all Information Society
+EU Programmes. 
 
 ### What’s the output?
 For each programme, list:
@@ -17,19 +19,17 @@ http://ec.europa.eu/information\_society/apps/projects/index.cfm?menu=secondary
 and parses it.
 
 ### Usage
-This was written having UNIX-based systems in mind. This usage section assumes you are in such a system (GNU/Linux; MacOS; etc.). Suggestions on how to enhance this section on other systems are welcome.
+This was written having UNIX-based systems in mind. This usage section assumes
+you are in such a system (GNU/Linux; MacOS; etc.). Suggestions on how to
+enhance this section on other systems are welcome.
 
 Dependencies:
-* Wget;
-* html2text. 
+* Wget
+* html2text.
 
 The following steps assume you have a clone of this repository on your system.
 
 1. Open a terminal;
 2. Go to the directory where this repository is;
-3. Type ‘sh ICT-EU.sh’;
+3. Type ``sh ICT-EU.sh``;
 4. A new CSV file called final.csv was created in the directory.
-
-### Known issues
-
-While this script is meant to work on both GNU/Linux and Mac OS systems, it seems that the output is malformed in Mac OS X.
