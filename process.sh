@@ -1,6 +1,12 @@
 #!/bin/bash
 
+echo "Merging the data into final.csv";
 cd tmp ;
+head -1 1.csv > ../final.csv
+tail *.csv -n +2 |grep -v ^= >> ../final.csv
+
+## This is the old website's process code. Leaving it here for now, since it can prove itself useful still
+exit;
 
 rm -f ../final.csv ;
 echo "\"Reference ID\";\"Title\";\"Description\";\"Funded Under\";\"Area\";\"Cost\";\"Contribution\";\"Reference\";\"Execution\";\"Project Status\";\"Contract Type\";\"Number of Partners\";\"Number of partner countries\"" > ../final.csv ;
